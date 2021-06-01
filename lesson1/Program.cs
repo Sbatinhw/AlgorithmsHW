@@ -10,13 +10,130 @@ namespace AlgorithmsHW
     {
         static void Main(string[] args)
         {
-            //lesson1.TaskOne(4);
-            //Console.WriteLine(lesson1.FibonachiRecurse(10));
-            //Console.WriteLine(lesson1.FibonachiCycle(10));
+            Console.WriteLine(lesson1.FibonachiRecurse(10));
+            Console.WriteLine(lesson1.FibonachiCycle(10));
+            //ожидание: 55 получено: 55 результат: верно
+            Console.WriteLine(lesson1.FibonachiRecurse(6));
+            Console.WriteLine(lesson1.FibonachiCycle(6));
+            //ожидание: 8 получено: 8 результат: верно
+            Console.WriteLine(lesson1.FibonachiRecurse(12));
+            Console.WriteLine(lesson1.FibonachiCycle(12));
+            //ожидание: 144 получено: 144 результат: верно
+            Console.WriteLine(lesson1.FibonachiRecurse(-1));
+            Console.WriteLine(lesson1.FibonachiCycle(-1));
+            //ожидание: 0 получено: 0 результат: верно
+            Console.WriteLine(lesson1.FibonachiRecurse(0));
+            Console.WriteLine(lesson1.FibonachiCycle(0));
+            //ожидание: 0 получено: 0 результат: верно
+
 
 
 
             Console.ReadLine();
         }
     }
+
+    class lesson1
+    {
+
+        /* Требуется реализовать на C# функцию согласно блок-схеме. 
+         * Блок-схема описывает алгоритм проверки, простое число или нет. */
+        public static string TaskOne(int number)
+        {
+            int d = 0;
+            int i = 2;
+
+            while (i < number)
+            {
+                if (number % i == 0)
+                {
+                    d++;
+                }
+                i++;
+            }
+
+            if (d == 0)
+            {
+                return "простое"; 
+            }
+            else
+            {
+                return "Не простое";
+            }
+
+        }
+
+        /* Вычислите асимптотическую сложность функции из примера ниже. */
+        public static int StrangeSum(int[] inputArray)
+        {
+            int sum = 0;
+            for (int i = 0; i < inputArray.Length; i++)
+            {
+                for (int j = 0; j < inputArray.Length; j++)
+                {
+                    for (int k = 0; k < inputArray.Length; k++)
+                    {
+                        int y = 0;
+
+                        if (j != 0)
+                        {
+                            y = k / j;
+                        }
+
+                        sum += inputArray[i] + i + k + j + y;
+                    }
+                }
+            }
+
+            return sum;
+        }
+        /* Асимптоническая сложность функции равна O(N * N * N)*/
+
+
+
+
+        /* Реализуйте функцию вычисления числа Фибоначчи
+           Требуется реализовать рекурсивную версию и версию без рекурсии (через цикл). */
+
+        public static int FibonachiRecurse(int num)
+        {
+            int fib = 0;
+
+            if (num == 0)
+            {
+                return 0;
+            }
+            else if (num == 1)
+            {
+                return 1;
+            }
+            else if (num > 1)
+            {
+                return FibonachiRecurse(num - 1) + FibonachiRecurse(num - 2);
+            }
+
+            return 0;
+        }
+
+        public static int FibonachiCycle(int num)
+        {
+            int x = 0;
+            int y = 1;
+            int z = 0;
+
+            for (int i = 0; i < num; i++)
+            {
+                z = x;
+                x = y;
+                y += z;
+            }
+
+            return x;
+        }
+
+
+
+        //
+    }
+
 }
