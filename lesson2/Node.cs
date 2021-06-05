@@ -83,28 +83,50 @@ namespace AlgorithmsHW
 
         public void RemoveNode(int index)
         {
-            Node test = start_node;
-            int i = 1;
+            int i = 0;
+            Node node = start_node;
             while (true)
             {
-                if(i == index)
-                {
-                    RemoveNode(test);
-                    break;
+                if(i < index) 
+                { 
+                    i++;
+                    node = node.NextNode;
+                    continue; 
                 }
-                else
-                {
-                    test = test.NextNode;
-                }
+                Node prev = node.PrevNode;
+                Node next = node.NextNode;
+                if(prev != null){ prev.NextNode = next; }
+                else { start_node = next; }
+                if (next != null) { next.PrevNode = prev; }
+                else { start_node = prev; }
+                //start_node = node;
+                break;
             }
         }
 
         public void RemoveNode(Node node)
         {
-            Node prev = node.PrevNode;
-            Node next = node.NextNode;
-            prev.NextNode = next;
-            next.PrevNode = prev;
+            while (true)
+            {
+                if(start_node == node)
+                {
+                    Node prev = node.PrevNode;
+                    Node next = node.NextNode;
+                    if (prev != null) { prev.NextNode = next; }
+                    else { start_node = next; }
+                    if (next != null) { next.PrevNode = prev; }
+                    else { start_node = prev; }
+                } 
+                else if (start_node.NextNode == null) 
+                { 
+                    break; 
+                } 
+                else
+                {
+                    
+                    start_node = start_node.NextNode;
+                }
+            }
         }
 
         public static Node RetLastNode(Node node) //возвращает последний элемент
@@ -116,17 +138,21 @@ namespace AlgorithmsHW
             }
         }
 
-        public static void PrintAllNode(Node node)
+        public void PrintAllNode()
         {
+            Node node = start_node;
             while (true)
             {
                 if (node.PrevNode == null) { break; }
                 else { node = node.PrevNode; }
             }
 
+            Console.WriteLine("\n-");
+
             while (true)
             {
-                Console.WriteLine(node.Value); Console.ReadLine();
+                Console.WriteLine(node.Value); 
+                //Console.ReadLine();
                 if (node.NextNode == null) { break; }
                 else { node = node.NextNode; }
             }
