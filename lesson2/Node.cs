@@ -36,7 +36,7 @@ namespace AlgorithmsHW
                 start_node = new Node { Value = value };
             } else
             {
-                AddNodeAfter(start_node, value);
+                AddNodeAfter( RetLastNode (start_node), value);
             }
 
         }
@@ -106,6 +106,16 @@ namespace AlgorithmsHW
             prev.NextNode = next;
             next.PrevNode = prev;
         }
+
+        public static Node RetLastNode(Node node) //возвращает последний элемент
+        {
+            while (true)
+            {
+                if(node.NextNode == null) { return node; }
+                else { node = node.NextNode; }
+            }
+        }
+
     }
 
 }
