@@ -28,7 +28,7 @@ namespace AlgorithmsHW
 
     public class UseNode : ILinkedList
     {
-        Node start_node;
+        public Node start_node;
         public void AddNode(int value)
         {
             if(start_node == null) 
@@ -114,6 +114,23 @@ namespace AlgorithmsHW
                 if(node.NextNode == null) { return node; }
                 else { node = node.NextNode; }
             }
+        }
+
+        public static void PrintAllNode(Node node)
+        {
+            while (true)
+            {
+                if (node.PrevNode == null) { break; }
+                else { node = node.PrevNode; }
+            }
+
+            while (true)
+            {
+                Console.WriteLine(node.Value); Console.ReadLine();
+                if (node.NextNode == null) { break; }
+                else { node = node.NextNode; }
+            }
+
         }
 
     }
