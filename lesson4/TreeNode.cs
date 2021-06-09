@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgorithmHW
+namespace AlgorithmsHW
 {
     class Node
     {
@@ -35,7 +35,7 @@ namespace AlgorithmHW
             int low = 0;
             int top = arr.Length - 1;
             Node node = new Node();
-            if(low > top) { node = null; }
+            if (low > top) { node = null; }
             else
             {
                 int mid = (low + top) / 2;
@@ -50,7 +50,7 @@ namespace AlgorithmHW
         public static int[] GenerateArr(int low, int top, int[] arr)
         {
             int[] newarr = new int[top - low + 1];
-            for(int i = 0; i < newarr.Length; i++)
+            for (int i = 0; i < newarr.Length; i++)
             {
                 newarr[i] = arr[i + low];
             }
@@ -60,11 +60,11 @@ namespace AlgorithmHW
         public static void TestSelectAllNode(Node node, int lev = 0)
         {
             StringBuilder space = new StringBuilder();
-            for(int i = 0; i < lev; i++)
+            for (int i = 0; i < lev; i++)
             {
                 space.Append(" ");
             }
-            if(node == null) { return; }
+            if (node == null) { return; }
             Console.WriteLine($"{space}Нода: {node.Value}");
             Console.WriteLine($"{space}Левый: {node?.LeftChild?.Value}");
             Console.WriteLine($"{space}Правый: {node?.RightChild?.Value}");
@@ -80,12 +80,12 @@ namespace AlgorithmHW
         public void SelectNode(Node node, int rowlen = 0)
         {
             int len = rowlen + 11 + CalcLenRow(node);
-            if(node.LeftChild != null) { SelectNode(node.LeftChild, len); }
+            if (node.LeftChild != null) { SelectNode(node.LeftChild, len); }
 
             StringBuilder space = new StringBuilder();
 
-            
-            for(int i = 0; i < len; i++)
+
+            for (int i = 0; i < len; i++)
             {
                 space.Append(" ");
             }
@@ -101,8 +101,8 @@ namespace AlgorithmHW
         public static int CalcLenRow(Node node)
         {
             int max = 0;
-            if(node.LeftChild != null) { max = node.LeftChild.Value.ToString().Length; }
-            if(node.RightChild != null && node.RightChild.Value.ToString().Length > max) 
+            if (node.LeftChild != null) { max = node.LeftChild.Value.ToString().Length; }
+            if (node.RightChild != null && node.RightChild.Value.ToString().Length > max)
             { max = node.RightChild.Value.ToString().Length; }
             if (node.Value.ToString().Length > max)
             { max = node.Value.ToString().Length; }
@@ -111,13 +111,13 @@ namespace AlgorithmHW
 
         public void RemoveItem(int value)
         {
-            
-            if(start_node.Value == value)
+
+            if (start_node.Value == value)
             {
-                    Node node = start_node;
-                    start_node = null;
-                    if(node.LeftChild != null){ InsertValue(node.LeftChild); }
-                    if(node.RightChild != null){ InsertValue(node.RightChild); }
+                Node node = start_node;
+                start_node = null;
+                if (node.LeftChild != null) { InsertValue(node.LeftChild); }
+                if (node.RightChild != null) { InsertValue(node.RightChild); }
                 return;
             }
             Node prev = start_node;
@@ -125,24 +125,26 @@ namespace AlgorithmHW
             Node current = start_node;
             while (true)
             {
-                if(current.Value == value)
+                if (current.Value == value)
                 {
                     Node left = current.LeftChild;
                     Node right = current.RightChild;
                     //current = null;
-                    if(prev.LeftChild.Value == value)
+                    if (prev.LeftChild.Value == value)
                     {
                         prev.LeftChild = null;
-                    } else if(prev.RightChild.Value == value)
+                    }
+                    else if (prev.RightChild.Value == value)
                     {
                         prev.RightChild = null;
                     }
-                    if (left != null) { InsertValue(left);  }
+                    if (left != null) { InsertValue(left); }
                     if (right != null) { InsertValue(right); }
                     break;
-                } else if(current.Value > value)
+                }
+                else if (current.Value > value)
                 {
-                    if(current.LeftChild != null)
+                    if (current.LeftChild != null)
                     {
                         prev = current;
                         current = current.LeftChild;
@@ -154,7 +156,8 @@ namespace AlgorithmHW
                         Console.WriteLine("notfound");
                         Console.ReadLine();
                     }
-                } else if(current.Value < value)
+                }
+                else if (current.Value < value)
                 {
                     if (current.RightChild != null)
                     {
@@ -177,22 +180,24 @@ namespace AlgorithmHW
             Node result = null;
             while (true)
             {
-                if(node.Value == value)
+                if (node.Value == value)
                 {
                     result = node;
                     break;
-                } else if(node.Value > value)
+                }
+                else if (node.Value > value)
                 {
-                    if(node.LeftChild == null) { break; }
+                    if (node.LeftChild == null) { break; }
                     node = node.LeftChild;
-                } else if(node.Value < value)
+                }
+                else if (node.Value < value)
                 {
-                    if(node.RightChild == null) { break; }
+                    if (node.RightChild == null) { break; }
                     node = node.RightChild;
                 }
 
-               
-                
+
+
             }
             return result;
         }
@@ -207,7 +212,7 @@ namespace AlgorithmHW
         public void InsertValue(Node insert_node)
         {
             Node node = start_node;
-            if(start_node == null)
+            if (start_node == null)
             {
                 start_node = insert_node;
                 return;
@@ -254,24 +259,26 @@ namespace AlgorithmHW
                     }
                     else
                     {
-                        if(node.LeftChild == null)
+                        if (node.LeftChild == null)
                         {
                             node.LeftChild = insert_node;
                             break;
-                        } else if (node.RightChild == null)
+                        }
+                        else if (node.RightChild == null)
                         {
                             node.RightChild = insert_node;
                             break;
-                        } else if (DeepCulc(node.LeftChild) <= DeepCulc(node.RightChild))
+                        }
+                        else if (DeepCulc(node.LeftChild) <= DeepCulc(node.RightChild))
                         {
-                                node = node.LeftChild;
-                                /*insert_node.LeftChild = node.LeftChild;
-                                node.LeftChild = insert_node;
-                                break;*/
+                            node = node.LeftChild;
+                            /*insert_node.LeftChild = node.LeftChild;
+                            node.LeftChild = insert_node;
+                            break;*/
                         }
                         else
                         {
-                                node = node.RightChild;
+                            node = node.RightChild;
                         }
                     }
                 }
@@ -281,9 +288,9 @@ namespace AlgorithmHW
 
         public static int DeepCulc(Node node, int len = 0)
         {
-            if(node == null) 
+            if (node == null)
             { return 0; }
-            if(node.LeftChild == null && node.RightChild == null) { return len + 1; }
+            if (node.LeftChild == null && node.RightChild == null) { return len + 1; }
             int right = 0;
             int left = 0;
 
@@ -294,13 +301,15 @@ namespace AlgorithmHW
             if (right > left)
             {
                 return right;
-            } else
+            }
+            else
             {
                 return left;
             }
 
         }
-        
+
 
     }
 }
+

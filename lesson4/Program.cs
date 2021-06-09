@@ -13,8 +13,8 @@ namespace AlgorithmsHW
     {
         static void Main(string[] args)
         {
-            //BenchmarkRunner.Run<TestSearch>();
-
+            //BenchmarkRunner.Run<TestSearch5>();
+            TreeNode tree = new TreeNode();
 
             Console.ReadLine();
         }
