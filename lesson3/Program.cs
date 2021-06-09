@@ -13,7 +13,36 @@ namespace AlgorithmHW
     {
         static void Main(string[] args)
         {
-            BenchmarkRunner.Run<TestAlg>();
+            //BenchmarkRunner.Run<TestAlg>();
+
+            /*Node testn = new Node { Value = 2 };
+            testn.LeftChild = new Node { Value = 3 } ;
+            testn.RightChild = new Node { Value = 4 };
+            TreeNode.TestSelectAllNode(testn);*/
+
+            int[] testarr = new int[] { 0, 1, 2, 3, 4, 5, 6 };
+
+            //int[] testarr = new int[] { 0 };
+            //int[] testarr = new int[] { 0, 1, 3 };
+
+            TreeNode testree = new TreeNode(testarr);
+            testree.SelectNode();
+            Console.ReadLine();
+            //Console.Clear();
+            //testree.SelectNode(testree.start_node);
+
+
+            //testree.RemoveItem(1);
+
+            Node zds = testree.GetNodeByValue(20);
+            Console.WriteLine($"tst {zds?.Value}");
+
+
+
+
+            //testree.SelectNode();
+
+            //Console.WriteLine (TreeNode.DeepCulc(testree.start_node));
 
 
 
@@ -34,6 +63,7 @@ namespace AlgorithmHW
         //
     }
 
+    //задание 1
     public class TestAlg
     {
         [Benchmark(Description = "test1")]
@@ -112,6 +142,8 @@ namespace AlgorithmHW
             return Math.Sqrt((x * x) + (y * y));
         }
     }
+
+    
 
 
     //
