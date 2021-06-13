@@ -13,8 +13,27 @@ namespace AlgorithmsHW
     {
         static void Main(string[] args)
         {
+            //задание 1
+            //результаты в TestSearch
             //BenchmarkRunner.Run<TestSearch5>();
-            TreeNode tree = new TreeNode();
+
+
+            //задание 2
+            int[] arr = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+
+            TreeNode tree = new TreeNode(arr);
+            //tree.SelectNode(); //верно
+            
+
+            tree.InsertValue(8);
+            //tree.SelectNode(); //верно
+
+            tree.InsertValue(9);
+            //tree.SelectNode(); //верно
+
+            tree.RemoveItem(9);
+            tree.SelectNode(); //верно
+
 
             Console.ReadLine();
         }

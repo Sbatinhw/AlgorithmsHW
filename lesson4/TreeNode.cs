@@ -57,24 +57,18 @@ namespace AlgorithmsHW
             return newarr;
         }
 
-        public static void TestSelectAllNode(Node node, int lev = 0)
-        {
-            StringBuilder space = new StringBuilder();
-            for (int i = 0; i < lev; i++)
-            {
-                space.Append(" ");
-            }
-            if (node == null) { return; }
-            Console.WriteLine($"{space}Нода: {node.Value}");
-            Console.WriteLine($"{space}Левый: {node?.LeftChild?.Value}");
-            Console.WriteLine($"{space}Правый: {node?.RightChild?.Value}");
-            TestSelectAllNode(node.LeftChild, lev + 1);
-            TestSelectAllNode(node.RightChild, lev + 1);
-        }
+        
 
         public void SelectNode()
         {
             SelectNode(start_node);
+        }
+
+        public static void SelectOneNode(Node node)
+        {
+            Console.WriteLine($"Левая:    {node?.LeftChild?.Value}");
+            Console.WriteLine($"Значение: {node?.Value}");
+            Console.WriteLine($"Правая:   {node?.RightChild?.Value}\n");
         }
 
         public void SelectNode(Node node, int rowlen = 0)
@@ -91,7 +85,7 @@ namespace AlgorithmsHW
             }
 
             Console.WriteLine($"{space}Левая:    {node?.LeftChild?.Value}");
-            Console.WriteLine($"{space}Значение: {node.Value}");
+            Console.WriteLine($"{space}Значение: {node?.Value}");
             Console.WriteLine($"{space}Правая:   {node?.RightChild?.Value}");
 
             if (node.RightChild != null) { SelectNode(node.RightChild, len); }
@@ -125,16 +119,22 @@ namespace AlgorithmsHW
             Node current = start_node;
             while (true)
             {
+                //
+                SelectOneNode(prev);
+                SelectOneNode(current);
+                Console.ReadLine();
+
+                //
                 if (current.Value == value)
                 {
                     Node left = current.LeftChild;
                     Node right = current.RightChild;
                     //current = null;
-                    if (prev.LeftChild.Value == value)
+                    if (prev?.LeftChild?.Value == value)
                     {
                         prev.LeftChild = null;
                     }
-                    else if (prev.RightChild.Value == value)
+                    else if (prev?.RightChild?.Value == value)
                     {
                         prev.RightChild = null;
                     }
@@ -155,6 +155,7 @@ namespace AlgorithmsHW
 
                         Console.WriteLine("notfound");
                         Console.ReadLine();
+                        break;
                     }
                 }
                 else if (current.Value < value)
@@ -169,6 +170,7 @@ namespace AlgorithmsHW
                     {
                         Console.WriteLine("notfound");
                         Console.ReadLine();
+                        break;
                     }
                 }
             }
