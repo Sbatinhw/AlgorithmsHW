@@ -105,6 +105,58 @@ namespace AlgorithmsHW
             return max;
         }
 
+        public Node Dfs(int Value)
+        {
+            Stack<Node> stack = new Stack<Node>();
+            stack.Push(start_node);
+
+            while (true)
+            {
+                if(!stack.TryPop(out Node result))
+                {
+                    Console.WriteLine("Значение не найдено или дерево пустое");
+                    break;
+                }
+                //
+                SelectOneNode(result);
+                Console.ReadLine();
+                //
+                if (result.Value == Value)
+                {
+                    return result;
+                }
+                if (result.LeftChild != null) { stack.Push(result.LeftChild); }
+                if (result.RightChild != null) { stack.Push(result.RightChild); }
+            }
+
+            return null;
+        }
+
+        public Node Bfs(int Value)
+        {
+            Queue<Node> queue = new Queue<Node>();
+            queue.Enqueue(start_node);
+            while(true)
+            {
+                if(!queue.TryDequeue(out Node result)) 
+                {
+                    Console.WriteLine("Значение не найдено или дерево пустое");                   
+                    break; 
+                }
+                //
+                SelectOneNode(result);
+                Console.ReadLine();
+                //
+                if(result.Value == Value)
+                {
+                    return result;
+                }
+                if(result.LeftChild != null) { queue.Enqueue(result.LeftChild); }
+                if(result.RightChild != null) { queue.Enqueue(result.RightChild); }
+            }
+            return null;
+        }
+
         public void RemoveItem(int value)
         {
 
