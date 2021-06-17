@@ -29,6 +29,11 @@ namespace AlgorithmsHW
     public class UseNode : ILinkedList
     {
         public Node start_node;
+
+        /// <summary>
+        /// Добавление нового элемента
+        /// </summary>
+        /// <param name="value">значение элемента</param>
         public void AddNode(int value)
         {
             if(start_node == null) 
@@ -41,6 +46,11 @@ namespace AlgorithmsHW
 
         }
 
+        /// <summary>
+        /// Добавление нового элемента после определенного
+        /// </summary>
+        /// <param name="node">элемент после которого нужно добавить</param>
+        /// <param name="value">значение нового элемента</param>
         public void AddNodeAfter(Node node, int value)
         {
             var newNode = new Node { Value = value };
@@ -50,6 +60,11 @@ namespace AlgorithmsHW
             newNode.PrevNode = node;
         }
 
+        /// <summary>
+        /// Поиск элемента по значению
+        /// </summary>
+        /// <param name="searchValue">искомое значение</param>
+        /// <returns>нода с искомым значением \ null если ничего не найдено</returns>
         public Node FindNode(int searchValue)
         {
             Node retNode = start_node;
@@ -68,6 +83,10 @@ namespace AlgorithmsHW
             }
         }
 
+        /// <summary>
+        /// Функция считает длину списка
+        /// </summary>
+        /// <returns>длина списка</returns>
         public int GetCount()
         {
             Node test = start_node;
@@ -81,6 +100,10 @@ namespace AlgorithmsHW
             return i;
         }
 
+        /// <summary>
+        /// удаление элемента по индексу
+        /// </summary>
+        /// <param name="index">порядковый номер элемента</param>
         public void RemoveNode(int index)
         {
             int i = 0;
@@ -103,6 +126,7 @@ namespace AlgorithmsHW
                 break;
             }
         }
+
 
         public void RemoveNode(Node node)
         {
@@ -138,6 +162,9 @@ namespace AlgorithmsHW
             }
         }
 
+        /// <summary>
+        /// отображение всего списка
+        /// </summary>
         public void PrintAllNode()
         {
             Node node = start_node;

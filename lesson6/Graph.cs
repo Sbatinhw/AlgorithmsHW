@@ -166,11 +166,21 @@ namespace AlgorithmHW
             return Value == node.Value && Edges == node.Edges;
         }
 
+        //
     }
 
     public class Edge //Ребро
     {
         public int Weight { get; set; } //вес связи
         public Node Node { get; set; } // узел, на который связь ссылается
+
+        public override bool Equals(object obj)
+        {
+            var edge = obj as Edge;
+
+            if (edge == null) { return false; }
+            return Weight == edge.Weight && Node == edge.Node;
+        }
+
     }
 }

@@ -16,12 +16,7 @@ namespace AlgorithmsHW
     {
         public Node start_node = null;
 
-        public TreeNode()
-        {
-            start_node.Value = null;
-            start_node.LeftChild = null;
-            start_node.RightChild = null;
-        }
+        
 
         public TreeNode(int value)
         {
@@ -32,8 +27,14 @@ namespace AlgorithmsHW
             start_node = GenerateNode(array);
         }
 
+        /// <summary>
+        /// создание дерева из массива
+        /// </summary>
+        /// <param name="arr">массив int</param>
+        /// <returns></returns>
         public static Node GenerateNode(int[] arr)
         {
+            //для создания дерева используется бинарный алгоритм поиска
             int low = 0;
             int top = arr.Length - 1;
             Node node = new Node();
@@ -49,6 +50,13 @@ namespace AlgorithmsHW
             return node;
         }
 
+        /// <summary>
+        /// создание нового массива
+        /// </summary>
+        /// <param name="low"></param>
+        /// <param name="top"></param>
+        /// <param name="arr"></param>
+        /// <returns></returns>
         public static int[] GenerateArr(int low, int top, int[] arr)
         {
             int[] newarr = new int[top - low + 1];
@@ -94,6 +102,7 @@ namespace AlgorithmsHW
 
         }
 
+        
         public static int CalcLenRow(Node node)
         {
             int max = 0;
@@ -105,6 +114,10 @@ namespace AlgorithmsHW
             return max;
         }
 
+        /// <summary>
+        /// удаление элемента по значению
+        /// </summary>
+        /// <param name="value"></param>
         public void RemoveItem(int value)
         {
 
@@ -116,12 +129,13 @@ namespace AlgorithmsHW
                 if (node.RightChild != null) { InsertValue(node.RightChild); }
                 return;
             }
+            //предыдущий элемент
             Node prev = start_node;
-
+            //текущий элемент
             Node current = start_node;
             while (true)
             {
-                //
+                //отображение шагов при переборе дерева
                 SelectOneNode(prev);
                 SelectOneNode(current);
                 Console.ReadLine();

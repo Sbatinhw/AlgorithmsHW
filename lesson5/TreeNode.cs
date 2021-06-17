@@ -16,12 +16,6 @@ namespace AlgorithmsHW
     {
         public Node start_node = null;
 
-        public TreeNode()
-        {
-            start_node.Value = null;
-            start_node.LeftChild = null;
-            start_node.RightChild = null;
-        }
 
         public TreeNode(int value)
         {
@@ -105,6 +99,11 @@ namespace AlgorithmsHW
             return max;
         }
 
+        /// <summary>
+        /// поиск в глубину
+        /// </summary>
+        /// <param name="Value"></param>
+        /// <returns></returns>
         public Node Dfs(int Value)
         {
             Stack<Node> stack = new Stack<Node>();
@@ -132,6 +131,11 @@ namespace AlgorithmsHW
             return null;
         }
 
+        /// <summary>
+        /// поиск в ширину
+        /// </summary>
+        /// <param name="Value"></param>
+        /// <returns></returns>
         public Node Bfs(int Value)
         {
             Queue<Node> queue = new Queue<Node>();
