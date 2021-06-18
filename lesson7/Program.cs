@@ -9,7 +9,7 @@ namespace AlgorithmHW
             int[,] field = new int[3, 3];
             int[,] block = CreateBlock(field);
 
-            //Calc(field);
+            Calc(field);
             //PrintArr(field); //верно
 
 
