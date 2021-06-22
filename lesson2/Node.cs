@@ -29,6 +29,7 @@ namespace AlgorithmsHW
     public class UseNode : ILinkedList
     {
         public Node start_node;
+        public Node last_node;
 
         /// <summary>
         /// Добавление нового элемента
@@ -39,9 +40,10 @@ namespace AlgorithmsHW
             if(start_node == null) 
             {
                 start_node = new Node { Value = value };
+                last_node = start_node;
             } else
             {
-                AddNodeAfter( RetLastNode (start_node), value);
+                AddNodeAfter( last_node, value);
             }
 
         }
@@ -58,6 +60,7 @@ namespace AlgorithmsHW
             node.NextNode = newNode;
             newNode.NextNode = newItem;
             newNode.PrevNode = node;
+            last_node = newNode;
         }
 
         /// <summary>

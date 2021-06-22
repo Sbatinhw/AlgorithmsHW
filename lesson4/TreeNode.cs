@@ -265,40 +265,8 @@ namespace AlgorithmsHW
                 }
                 else //добавляемое значение уже есть в дереве
                 {
-                    if (node.LeftChild == null)
-                    {
-                        node.LeftChild = insert_node;
-                        break;
-                    }
-                    else if (node.RightChild == null)
-                    {
-                        node.RightChild = insert_node;
-                        break;
-                    }
-                    else
-                    {
-                        if (node.LeftChild == null)
-                        {
-                            node.LeftChild = insert_node;
-                            break;
-                        }
-                        else if (node.RightChild == null)
-                        {
-                            node.RightChild = insert_node;
-                            break;
-                        }
-                        else if (DeepCulc(node.LeftChild) <= DeepCulc(node.RightChild))
-                        {
-                            node = node.LeftChild;
-                            /*insert_node.LeftChild = node.LeftChild;
-                            node.LeftChild = insert_node;
-                            break;*/
-                        }
-                        else
-                        {
-                            node = node.RightChild;
-                        }
-                    }
+                    Console.WriteLine("Значение уже есть в дереве.");
+                    break;
                 }
 
             }
