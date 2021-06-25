@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-
+//
 namespace AlgorithmsHW
 {
     class Program
