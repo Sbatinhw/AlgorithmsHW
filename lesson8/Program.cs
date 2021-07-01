@@ -13,7 +13,7 @@ namespace AlgorithmHW
 
             //test = new int[] { 1, -4, -5}; //верно
 
-            test = RandomArray(15); //верно
+            //test = RandomArray(15); //верно
 
 
 
@@ -25,7 +25,10 @@ namespace AlgorithmHW
 
         public static int[] BuckSort(int[] arr)
         {
-            int quant = 5; //количество списков
+            int quant = Convert.ToInt32(Math.Sqrt(arr.Length));
+
+            if(quant * quant != arr.Length) { quant += 1; }
+
             int min = SearchMin(arr);
             int max = SearchMax(arr);
             int len = max - min;
@@ -35,48 +38,51 @@ namespace AlgorithmHW
             else if (len % quant != 0) { step = (len / quant) + 1; }
             else { step = len / quant; }
 
-            List<int> part1 = new List<int>();
-            List<int> part2 = new List<int>();
-            List<int> part3 = new List<int>();
-            List<int> part4 = new List<int>();
-            List<int> part5 = new List<int>();
-
             List<int> EndPart = new List<int>();
+            List<List<int>> list = new List<List<int>>();
 
-            int p1min = min;
-            int p1max = p1min + step;
-            int p2min = p1max + 1;
-            int p2max = p2min + step;
-            int p3min = p2max + 1;
-            int p3max = p3min + step;
-            int p4min = p3max + 1;
-            int p4max = p4min + step;
-            int p5min = p4max + 1;
-            int p5max = p5min + step;
+            for(int i = 0; i < quant; i++)
+            {
+                list.Add(new List<int>());
+            }
 
             for(int i = 0; i < arr.Length; i++)
             {
                 int val = arr[i];
-                if (val >= p1min && val <= p1max) { part1.Add(val); }
-                else if (val >= p2min && val <= p2max) { part2.Add(val); }
-                else if (val >= p3min && val <= p3max) { part3.Add(val); }
-                else if (val >= p4min && val <= p4max) { part4.Add(val); }
-                else if (val >= p5min && val <= p5max) { part5.Add(val); }
+                int minEdge = min;
+                int maxEdge = minEdge + step;
 
+                for(int j = 0; j < quant; j++)
+                {
+                    if(val >= minEdge && val <= maxEdge)
+                    {
+                        list[j].Add(val);
+                        break;
+                    }
+                    else
+                    {
+                        minEdge = maxEdge + 1;
+                        maxEdge = minEdge + step - 1;
 
+                        if(maxEdge < minEdge)
+                        {
+                            maxEdge = minEdge;
+                        }
+                    }
+                }
             }
 
-            if(part1.Count > 1) { EndPart.AddRange(BuckSort(part1.ToArray())); }
-            else { EndPart.AddRange(part1); }
-            if (part2.Count > 1) { EndPart.AddRange(BuckSort(part2.ToArray())); }
-            else { EndPart.AddRange(part2); }
-            if (part3.Count > 1) { EndPart.AddRange(BuckSort(part3.ToArray())); }
-            else { EndPart.AddRange(part3); }
-            if (part4.Count > 1) { EndPart.AddRange(BuckSort(part4.ToArray())); }
-            else { EndPart.AddRange(part4); }
-            if (part5.Count > 1) { EndPart.AddRange(BuckSort(part5.ToArray())); }
-            else { EndPart.AddRange(part5); }
-
+            for(int i = 0; i < quant; i++)
+            {
+                if(list[i].Count > 1) 
+                { 
+                    EndPart.AddRange(BuckSort(list[i].ToArray())); 
+                }
+                else
+                {
+                    EndPart.AddRange(list[i]);
+                }
+            }
 
             return EndPart.ToArray();
 
