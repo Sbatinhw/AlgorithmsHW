@@ -15,6 +15,10 @@ namespace AlgorithmHW
 
             //test = RandomArray(15); //верно
 
+            //test = new int[] { 5, 5 }; //верно
+
+            //test = new int[] { 1, -4, -5, 0, 2, 1 }; //верно
+
 
 
             SelectArray(test);
@@ -25,6 +29,10 @@ namespace AlgorithmHW
 
         public static int[] BuckSort(int[] arr)
         {
+            //
+            Console.WriteLine("tst");
+            Console.ReadLine();
+            //
             int quant = Convert.ToInt32(Math.Sqrt(arr.Length));
 
             if(quant * quant != arr.Length) { quant += 1; }
@@ -74,7 +82,7 @@ namespace AlgorithmHW
 
             for(int i = 0; i < quant; i++)
             {
-                if(list[i].Count > 1) 
+                if(list[i].Count > 1 && step != 0) 
                 { 
                     EndPart.AddRange(BuckSort(list[i].ToArray())); 
                 }
