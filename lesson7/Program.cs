@@ -42,6 +42,7 @@ namespace AlgorithmHW
             Console.WriteLine();
         }
 
+        //создание массива для добавления препятствий
         public static int[,] CreateBlock(int[,] arr)
         {
             int rows = arr.GetUpperBound(0) + 1;
@@ -59,6 +60,7 @@ namespace AlgorithmHW
             return block;
         }
 
+        //подсчет количества путей
         public static int[,] Calc(int[,] arr, int[,] block = null)
         {
             int rows = arr.GetUpperBound(0) + 1;
@@ -66,6 +68,7 @@ namespace AlgorithmHW
 
             arr[0, 0] = 1;
 
+            //заполнение левой грани единицами
             for (int i = 1; i < rows; i++)
             {
                 if (block != null && block[i, 0] == 0)
@@ -74,6 +77,7 @@ namespace AlgorithmHW
                 { arr[i, 0] = arr[i - 1, 0]; }
             }
 
+            //заполнение верхней грани единицами
             for (int i = 1; i < columns; i++)
             {
                 if (block != null && block[0, i] == 0)
@@ -82,6 +86,7 @@ namespace AlgorithmHW
                 { arr[0, i] = arr[0, i - 1]; }
             }
 
+            //заполнение остальных элементов
             for (int i = 1; i < rows; i++)
             {
                 for (int j = 1; j < columns; j++)
