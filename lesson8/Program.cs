@@ -13,7 +13,13 @@ namespace AlgorithmHW
 
             //test = new int[] { 1, -4, -5}; //верно
 
-            test = RandomArray(15); //верно
+            //test = RandomArray(); //верно
+
+            //test = new int[] { 5, 5 }; //верно
+
+            //test = new int[] { 1, -4, -5, 0, 2, 1 }; //верно
+
+            //test = new int[] { 5, 5, 3, 0 }; //верно
 
 
 
@@ -25,67 +31,88 @@ namespace AlgorithmHW
 
         public static int[] BuckSort(int[] arr)
         {
-            int quant = 5; //количество списков
+            //количество блоков
+            int quant = Convert.ToInt32(Math.Sqrt(arr.Length));
+
+            if(quant * quant != arr.Length) { quant += 1; }
+
+            //минимальное значение в массиве
             int min = SearchMin(arr);
+            //максимальное значение в массиве
             int max = SearchMax(arr);
+
             int len = max - min;
+            //диапазон для значений блоков
             int step = 0;
 
             if (len / quant < 1) { step = 0; }
             else if (len % quant != 0) { step = (len / quant) + 1; }
             else { step = len / quant; }
 
-            List<int> part1 = new List<int>();
-            List<int> part2 = new List<int>();
-            List<int> part3 = new List<int>();
-            List<int> part4 = new List<int>();
-            List<int> part5 = new List<int>();
-
+            //список отсортированных элементов
             List<int> EndPart = new List<int>();
+            //список блоков
+            List<List<int>> list = new List<List<int>>();
 
-            int p1min = min;
-            int p1max = p1min + step;
-            int p2min = p1max + 1;
-            int p2max = p2min + step;
-            int p3min = p2max + 1;
-            int p3max = p3min + step;
-            int p4min = p3max + 1;
-            int p4max = p4min + step;
-            int p5min = p4max + 1;
-            int p5max = p5min + step;
+            for(int i = 0; i < quant; i++)
+            {
+                list.Add(new List<int>());
+            }
 
+            //перебор и сортировка элементов изначального массива
             for(int i = 0; i < arr.Length; i++)
             {
                 int val = arr[i];
-                if (val >= p1min && val <= p1max) { part1.Add(val); }
-                else if (val >= p2min && val <= p2max) { part2.Add(val); }
-                else if (val >= p3min && val <= p3max) { part3.Add(val); }
-                else if (val >= p4min && val <= p4max) { part4.Add(val); }
-                else if (val >= p5min && val <= p5max) { part5.Add(val); }
 
+                //минимальное значение блока
+                int minEdge = min;
+                //максимальное значение блока
+                int maxEdge = minEdge + step;
 
+                //добавление элемента в блок
+                for(int j = 0; j < quant; j++)
+                {
+                    if(val >= minEdge && val <= maxEdge)
+                    {
+                        list[j].Add(val);
+                        break;
+                    }
+                    //переход к следующему блоку если не удаётся вставить элемент
+                    else
+                    {
+                        minEdge = maxEdge + 1;
+                        maxEdge = minEdge + step - 1;
+                        //костыль если массив состоит из одинаковых значений или значения отличаются на единицу
+                        if(maxEdge < minEdge)
+                        {
+                            maxEdge = minEdge;
+                        }
+                    }
+                }
             }
 
-            if(part1.Count > 1) { EndPart.AddRange(BuckSort(part1.ToArray())); }
-            else { EndPart.AddRange(part1); }
-            if (part2.Count > 1) { EndPart.AddRange(BuckSort(part2.ToArray())); }
-            else { EndPart.AddRange(part2); }
-            if (part3.Count > 1) { EndPart.AddRange(BuckSort(part3.ToArray())); }
-            else { EndPart.AddRange(part3); }
-            if (part4.Count > 1) { EndPart.AddRange(BuckSort(part4.ToArray())); }
-            else { EndPart.AddRange(part4); }
-            if (part5.Count > 1) { EndPart.AddRange(BuckSort(part5.ToArray())); }
-            else { EndPart.AddRange(part5); }
-
+            for(int i = 0; i < quant; i++)
+            {
+                //блок отправляется в рекурсивную сортировку если состоит больше чем из одного элемента
+                //и состоит из не одинаковых значений
+                if(list[i].Count > 1 && step != 0) 
+                { 
+                    EndPart.AddRange(BuckSort(list[i].ToArray())); 
+                }
+                else
+                {
+                    EndPart.AddRange(list[i]);
+                }
+            }
 
             return EndPart.ToArray();
 
         }
 
-        public static int[] RandomArray(int maxlen = 20, int min = -10000, int max = 10000)
+        public static int[] RandomArray(int min = -10000, int max = 10000)
         {
             Random rand = new Random();
-            int[] arr = new int[rand.Next(1, maxlen)];
+            int[] arr = new int[20];
 
             for(int i = 0; i < arr.Length; i++)
             {
